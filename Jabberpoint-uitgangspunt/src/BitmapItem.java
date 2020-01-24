@@ -3,9 +3,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
-
 import javax.imageio.ImageIO;
-
 import java.io.IOException;
 
 
@@ -28,14 +26,13 @@ public class BitmapItem extends SlideItem {
   protected static final String NOTFOUND = " niet gevonden";
 
 // level staat voor het item-level; name voor de naam van het bestand met de afbeelding
-	public BitmapItem(int level, String name) {
-		super(level);
-		imageName = name;
+	public BitmapItem(int itemlevel, String imageFileName) {
+		super(itemlevel);
 		try {
-			bufferedImage = ImageIO.read(new File(imageName));
+			bufferedImage = ImageIO.read(new File(imageFileName));
 		}
 		catch (IOException e) {
-			System.err.println(FILE + imageName + NOTFOUND) ;
+			System.err.println(FILE + imageFileName + NOTFOUND) ;
 		}
 	}
 
@@ -45,12 +42,12 @@ public class BitmapItem extends SlideItem {
 	}
 
 // geef de bestandsnaam van de afbeelding
-	public String getName() {
+	public String getImageName() {
 		return imageName;
 	}
 
 // geef de bounding box van de afbeelding
-	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style myStyle) {
+	public Rectangle getBoundingBox(Graphics graphic, ImageObserver observer, float scale, Style myStyle) {
 		return new Rectangle((int) (myStyle.indent * scale), 0,
 				(int) (bufferedImage.getWidth(observer) * scale),
 				((int) (myStyle.leading * scale)) + 
@@ -58,14 +55,14 @@ public class BitmapItem extends SlideItem {
 	}
 
 // teken de afbeelding
-	public void draw(int x, int y, float scale, Graphics g, Style myStyle, ImageObserver observer) {
+	public void drawItem(int x, int y, float scale, Graphics graphic, Style myStyle, ImageObserver observer) {
 		int width = x + (int) (myStyle.indent * scale);
 		int height = y + (int) (myStyle.leading * scale);
-		g.drawImage(bufferedImage, width, height,(int) (bufferedImage.getWidth(observer)*scale),
+		graphic.drawImage(bufferedImage, width, height,(int) (bufferedImage.getWidth(observer)*scale),
                 (int) (bufferedImage.getHeight(observer)*scale), observer);
 	}
 
-	public String toString() {
+	public String bitmapItemtoString() {
 		return "BitmapItem[" + getLevel() + "," + imageName + "]";
 	}
 }

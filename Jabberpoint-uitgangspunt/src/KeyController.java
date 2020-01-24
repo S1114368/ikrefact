@@ -29,7 +29,7 @@ public class KeyController extends KeyAdapter {
 			case KeyEvent.VK_PAGE_UP:
 			case KeyEvent.VK_UP:
 			case '-':
-				presentation.prevSlide();
+				presentation.previousSlide();
 				break;
 			case 'q':
 			case 'Q':

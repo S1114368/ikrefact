@@ -73,7 +73,7 @@ public class TextItem extends SlideItem {
 	}
 
 // teken het item
-	public void draw(int x, int y, float scale, Graphics g, 
+	public void drawItem(int x, int y, float scale, Graphics g,
 			Style myStyle, ImageObserver o) {
 		if (text == null || text.length() == 0) {
 			return;
@@ -98,7 +98,7 @@ public class TextItem extends SlideItem {
     	Graphics2D g2d = (Graphics2D) g;
     	FontRenderContext frc = g2d.getFontRenderContext();
     	LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
-    	float wrappingWidth = (Slide.WIDTH - s.indent) * scale;
+    	float wrappingWidth = (Slide.SLIDE_WIDTH - s.indent) * scale;
     	while (measurer.getPosition() < getText().length()) {
     		TextLayout layout = measurer.nextLayout(wrappingWidth);
     		layouts.add(layout);

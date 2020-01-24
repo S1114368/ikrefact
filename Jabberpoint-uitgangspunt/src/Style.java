@@ -48,7 +48,7 @@ public class Style {
 		this.leading = leading;
 	}
 
-	public String toString() {
+	public String styleToString() {
 		return "["+ indent + "," + color + "; " + fontSize + " on " + leading +"]";
 	}
 
