@@ -25,7 +25,6 @@ public class BitmapItem extends SlideItem {
 	protected static final String FILE = "Bestand ";
 	protected static final String NOTFOUND = " niet gevonden";
 
-	// level staat voor het item-level; name voor de naam van het bestand met de afbeelding
 	public BitmapItem(int itemlevel, String imageFileName) {
 		super(itemlevel);
 		try {
@@ -41,12 +40,10 @@ public class BitmapItem extends SlideItem {
 		this(0, null);
 	}
 
-	// geef de bestandsnaam van de afbeelding
 	public String getImageName() {
 		return imageName;
 	}
 
-	// geef de bounding box van de afbeelding
 	public Rectangle getBoundingBox(Graphics graphic, ImageObserver observer, float scale, Style myStyle) {
 		return new Rectangle((int) (myStyle.indent * scale), 0,
 				(int) (bufferedImage.getWidth(observer) * scale),
@@ -54,7 +51,6 @@ public class BitmapItem extends SlideItem {
 						(int) (bufferedImage.getHeight(observer) * scale));
 	}
 
-	// teken de afbeelding
 	// kan je x en y gebruiken?
 	public void drawItem(int x, int y, float scale, Graphics graphic, Style myStyle, ImageObserver observer) {
 		int width = x + (int) (myStyle.indent * scale);

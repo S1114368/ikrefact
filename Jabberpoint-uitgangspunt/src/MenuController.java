@@ -68,13 +68,11 @@ public class MenuController extends MenuBar {
 		setHelpMenu(helpMenu);		// nodig for portability (Motif, etc.).
 	}
 
-// een menu-item aanmaken
 	public MenuItem makeMenuItem(String name) {
 		return new MenuItem(name, new MenuShortcut(name.charAt(0)));
 	}
 
 	public void addOptionsToMenu(Menu menu, String[] options){
-
 		for(int i=0; i < options.length; i++){
 			if(i == 3 && options[3] == EXIT){
 				menu.addSeparator();

@@ -17,28 +17,24 @@ public class Slide {
 	public final static int SLIDE_WIDTH = 1200;
 	public final static int SLIDE_HEIGHT = 800;
 	protected String slideTitle; // de titel wordt apart bewaard
-	protected Vector<SlideItem> slideItems; // de slide-items worden in een Vector bewaard
+	protected Vector<SlideItem> slideItems;
 
 	public Slide() {
 		slideItems = new Vector<SlideItem>();
 	}
 
-	// Voeg een SlideItem toe
 	public void appendSlideItem(SlideItem anItem) {
 		slideItems.addElement(anItem);
 	}
 
-	// geef de titel van de slide
 	public String getTitle() {
 		return slideTitle;
 	}
 
-	// verander de titel van de slide
 	public void setSlideTitle(String newSlideTitle) {
 		slideTitle = newSlideTitle;
 	}
 
-	// Maak een TextItem van String, en voeg het TextItem toe
 	public void appendText(int level, String message) {
 		appendSlideItem(turnStringIntoTextItem(level, message));
 	}
@@ -47,22 +43,18 @@ public class Slide {
 		return new TextItem(level, message);
 	}
 
-	// geef het betreffende SlideItem
 	public SlideItem getSlideItem(int number) {
 		return (SlideItem)slideItems.elementAt(number);
 	}
 
-	// geef alle SlideItems in een Vector
 	public Vector<SlideItem> getSlideItems() {
 		return slideItems;
 	}
 
-	// geef de afmeting van de Slide
 	public int getSlideSize() {
 		return slideItems.size();
 	}
 
-	// teken de slide
 	public void drawSlide(Graphics graphics, Rectangle area, ImageObserver view) {
 		// De titel wordt apart behandeld
 		SlideItem slideItem = new TextItem(0, getTitle());

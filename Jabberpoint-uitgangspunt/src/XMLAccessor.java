@@ -27,7 +27,6 @@ import org.w3c.dom.NodeList;
 
 public class XMLAccessor extends Accessor {
 
-	/** Default API to use. */
 	protected static final String DEFAULT_API_TO_USE = "dom";
 
 	/** namen van xml tags of attributen */

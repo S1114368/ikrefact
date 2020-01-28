@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 
 public class Presentation {
-	private String presentationTitle; // de titel van de presentatie
-	private ArrayList<Slide> presentationSlides = null; // een ArrayList met de Slides
-	private int currentSlideNumber = 0; // het slidenummer van de huidige Slide
-	private SlideViewerComponent slideViewComponent = null; // de viewcomponent voor de Slides
+	private String presentationTitle;
+	private ArrayList<Slide> presentationSlides = null;
+	private int currentSlideNumber = 0;
+	private SlideViewerComponent slideViewComponent = null;
 
 	public Presentation() {
 		slideViewComponent = null;
@@ -45,12 +45,12 @@ public class Presentation {
 		this.slideViewComponent = slideViewerComponent;
 	}
 
-	// geef het nummer van de huidige slide
+
 	public int getCurrentSlideNumber() {
 		return currentSlideNumber;
 	}
 
-	// verander het huidige-slide-nummer en laat het aan het window weten.
+
 	public void setCurrentSlideNumber(int number) {
 		currentSlideNumber = number;
 		updatePresentationWithSlideNumber();
@@ -62,14 +62,12 @@ public class Presentation {
 		}
 	}
 
-	// ga naar de vorige slide tenzij je aan het begin van de presentatie bent
 	public void previousSlide() {
 		if (currentSlideNumber > 0) {
 			setCurrentSlideNumber(currentSlideNumber - 1);
 		}
 	}
 
-	// Ga naar de volgende slide tenzij je aan het einde van de presentatie bent.
 	public void nextSlide() {
 		if (currentSlideNumber < (presentationSlides.size()-1)) {
 			setCurrentSlideNumber(currentSlideNumber + 1);
@@ -82,12 +80,10 @@ public class Presentation {
 		setCurrentSlideNumber(-1);
 	}
 
-	// Voeg een slide toe aan de presentatie
 	public void appendSlideToPresentation(Slide slide) {
 		presentationSlides.add(slide);
 	}
 
-	// Geef een slide met een bepaald slidenummer
 	public Slide getSlide(int number) {
 		if (number < 0 || number >= getSize()) {
 			return null;
@@ -95,7 +91,6 @@ public class Presentation {
 		return (Slide)presentationSlides.get(number);
 	}
 
-	// Geef de huidige Slide
 	public Slide getCurrentSlide() {
 		return getSlide(currentSlideNumber);
 	}
