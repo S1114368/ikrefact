@@ -45,16 +45,14 @@ public class BitmapItem extends SlideItem {
 	}
 
 	public Rectangle getBoundingBox(Graphics graphic, ImageObserver observer, float scale, Style myStyle) {
-		return new Rectangle((int) (myStyle.indent * scale), 0,
-				(int) (bufferedImage.getWidth(observer) * scale),
-				((int) (myStyle.leading * scale)) +
-						(int) (bufferedImage.getHeight(observer) * scale));
+		return new Rectangle((int) (myStyle.indent * scale), 0, (int) (bufferedImage.getWidth(observer) * scale),
+				((int) (myStyle.leading * scale)) + (int) (bufferedImage.getHeight(observer) * scale));
 	}
 
 	// kan je x en y gebruiken?
-	public void drawItem(int x, int y, float scale, Graphics graphic, Style myStyle, ImageObserver observer) {
-		int width = x + (int) (myStyle.indent * scale);
-		int height = y + (int) (myStyle.leading * scale);
+	public void drawItem(int widthX, int heightY, float scale, Graphics graphic, Style myStyle, ImageObserver observer) {
+		int width = widthX + (int) (myStyle.indent * scale);
+		int height = heightY + (int) (myStyle.leading * scale);
 		graphic.drawImage(bufferedImage, width, height,(int) (bufferedImage.getWidth(observer)*scale),
 				(int) (bufferedImage.getHeight(observer)*scale), observer);
 	}

@@ -18,21 +18,19 @@ import javax.swing.JFrame;
  */
 
 public class SlideViewerComponent extends JComponent {
+	private static final int FONTSTYLE = Font.BOLD;
+	private static final int FONTHEIGHT = 10;
+	private static final int XPOSITION = 1100;
+	private static final int YPOSITION = 20;
+	private static final Color BACKGROUNDCOLOR = Color.white;
+	private static final Color COLOR = Color.black;
+	private static final String FONTNAME = "Dialog";
+	private static final long serialVersionUID = 227L;
 
 	private Slide currentSlide;
 	private Font labelFont = null;
 	private Presentation presentation = null;
 	private JFrame frame = null;
-
-	private static final long serialVersionUID = 227L;
-
-	private static final Color BACKGROUNDCOLOR = Color.white;
-	private static final Color COLOR = Color.black;
-	private static final String FONTNAME = "Dialog";
-	private static final int FONTSTYLE = Font.BOLD;
-	private static final int FONTHEIGHT = 10;
-	private static final int XPOSITION = 1100;
-	private static final int YPOSITION = 20;
 
 	public SlideViewerComponent(Presentation pres, JFrame frame) {
 		setBackground(BACKGROUNDCOLOR);
@@ -59,6 +57,7 @@ public class SlideViewerComponent extends JComponent {
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(BACKGROUNDCOLOR);
 		graphics.fillRect(0, 0, getSize().width, getSize().height);
+
 		if (presentation.getCurrentSlideNumber() < 0 || currentSlide == null) {
 			return;
 		}

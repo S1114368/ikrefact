@@ -10,7 +10,6 @@
 
 class DemoPresentation extends Accessor {
 
-//?
 	public void loadFile(Presentation presentation, String unusedFilename) {
 		presentation.setTitle("Demo Presentation");
 		presentation.appendSlideToPresentation(makeFirstSlide());
@@ -22,7 +21,7 @@ class DemoPresentation extends Accessor {
 		throw new IllegalStateException("Save As->Demo! aangeroepen");
 	}
 
-	public Slide makeFirstSlide(){
+	public Slide makeFirstSlide() {
 		Slide slide;
 		slide = new Slide();
 		slide.setSlideTitle("JabberPoint");
@@ -39,7 +38,7 @@ class DemoPresentation extends Accessor {
 		return slide;
 	}
 
-	public Slide makeSecondSlide(){
+	public Slide makeSecondSlide() {
 		Slide slide;
 		slide = new Slide();
 		slide.setSlideTitle("Demonstratie van levels en stijlen");
@@ -53,7 +52,7 @@ class DemoPresentation extends Accessor {
 		return slide;
 	}
 
-	public Slide makeThrirdSlide(){
+	public Slide makeThrirdSlide() {
 		Slide slide;
 		slide = new Slide();
 		slide.setSlideTitle("De derde slide");

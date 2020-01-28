@@ -16,6 +16,7 @@ import java.util.Vector;
 public class Slide {
 	public final static int SLIDE_WIDTH = 1200;
 	public final static int SLIDE_HEIGHT = 800;
+
 	protected String slideTitle; // de titel wordt apart bewaard
 	protected Vector<SlideItem> slideItems;
 
@@ -25,10 +26,6 @@ public class Slide {
 
 	public void appendSlideItem(SlideItem anItem) {
 		slideItems.addElement(anItem);
-	}
-
-	public String getTitle() {
-		return slideTitle;
 	}
 
 	public void setSlideTitle(String newSlideTitle) {
@@ -51,8 +48,17 @@ public class Slide {
 		return slideItems;
 	}
 
+	public String getTitle() {
+		return slideTitle;
+	}
+
 	public int getSlideSize() {
 		return slideItems.size();
+	}
+
+	// geef de schaal om de slide te kunnen tekenen
+	private float getScale(Rectangle area) {
+		return Math.min(((float)area.width) / ((float)SLIDE_WIDTH), ((float)area.height) / ((float)SLIDE_HEIGHT));
 	}
 
 	public void drawSlide(Graphics graphics, Rectangle area, ImageObserver view) {
@@ -62,16 +68,12 @@ public class Slide {
 
 		slideItem.drawItem(area.x, area.y, getScale(area), graphics, style, view);
 		area.y += slideItem.getBoundingBox(graphics, view, getScale(area), style).height;
+
 		for (int number=0; number<getSlideSize(); number++) {
 			slideItem = (SlideItem)getSlideItems().elementAt(number);
 			style = Style.getStyle(slideItem.getLevel());
 			slideItem.drawItem(area.x, area.y, getScale(area), graphics, style, view);
 			area.y += slideItem.getBoundingBox(graphics, view, getScale(area), style).height;
 		}
-	}
-
-	// geef de schaal om de slide te kunnen tekenen
-	private float getScale(Rectangle area) {
-		return Math.min(((float)area.width) / ((float)SLIDE_WIDTH), ((float)area.height) / ((float)SLIDE_HEIGHT));
 	}
 }

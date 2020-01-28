@@ -19,11 +19,9 @@ import javax.swing.JOptionPane;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 public class MenuController extends MenuBar {
-
 	private Frame parent; // het frame, alleen gebruikt als parent voor de Dialogs
 	private Presentation presentation; // Er worden commando's gegeven aan de presentatie
 	private MenuItem menuItem;
-
 
 	private static final long serialVersionUID = 227L;
 
@@ -54,7 +52,6 @@ public class MenuController extends MenuBar {
 		String[] viewMenuOptions = {VIEW, NEXT, PREVIOUS, GOTO};
 		String[] helpMenuOptions = {ABOUT};
 
-
 		Menu fileMenu = new Menu(FILE);
 		addOptionsToMenu(fileMenu, fileMenuOptions);
 		add(fileMenu);
@@ -84,6 +81,7 @@ public class MenuController extends MenuBar {
 
 	public void addActionListener(MenuItem menuItem, String event){
 		switch(event){
+
 			case OPEN:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent actionEvent) {
@@ -95,11 +93,12 @@ public class MenuController extends MenuBar {
 						} catch (IOException exc) {
 							JOptionPane.showMessageDialog(parent, IOEXCEPTION + exc,
 									LOADERROR, JOptionPane.ERROR_MESSAGE);
-						}
+							}
 						parent.repaint();
 					}
 				} );
 				break;
+
 			case NEW:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent actionEvent) {
@@ -108,6 +107,7 @@ public class MenuController extends MenuBar {
 					}
 				});
 				break;
+
 			case SAVE:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -117,10 +117,11 @@ public class MenuController extends MenuBar {
 						} catch (IOException exc) {
 							JOptionPane.showMessageDialog(parent, IOEXCEPTION + exc,
 									SAVEERROR, JOptionPane.ERROR_MESSAGE);
-						}
+							}
 					}
 				});
 				break;
+
 			case EXIT:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent actionEvent) {
@@ -128,6 +129,7 @@ public class MenuController extends MenuBar {
 					}
 				});
 				break;
+
 			case NEXT:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent actionEvent) {
@@ -141,6 +143,7 @@ public class MenuController extends MenuBar {
 					}
 				});
 				break;
+
 			case GOTO:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent actionEvent) {
@@ -149,6 +152,7 @@ public class MenuController extends MenuBar {
 					}
 				});
 				break;
+
 			case ABOUT:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent actionEvent) {

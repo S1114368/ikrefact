@@ -23,7 +23,6 @@ public class JabberPoint {
 
 	/** Het Main Programma */
 	public static void main(String argv[]) {
-
 		Style.createStyles();
 		Presentation presentation = new Presentation();
 		new SlideViewerFrame(JABVERSION, presentation);
@@ -38,6 +37,6 @@ public class JabberPoint {
 			JOptionPane.showMessageDialog(null,
 					IOERROR + exception, JABERR,
 					JOptionPane.ERROR_MESSAGE);
-		}
+			}
 	}
 }

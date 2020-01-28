@@ -25,9 +25,9 @@ import java.util.ArrayList;
  */
 
 public class TextItem extends SlideItem {
-	private String text;
-
 	private static final String EMPTYTEXT = "No Text Given";
+
+	private String text;
 
 	public TextItem(int level, String string) {
 		super(level);
@@ -37,20 +37,6 @@ public class TextItem extends SlideItem {
 // een leeg textitem
 	public TextItem() {
 		this(0, EMPTYTEXT);
-	}
-
-	public String getText() {
-		return text == null ? "" : text;
-	}
-
-	public AttributedString getAttributedString(Style style, float scale) {
-		return createAttributedString(style, scale);
-	}
-
-	public AttributedString createAttributedString(Style style, float scale){
-		AttributedString attributedString = new AttributedString(getText());
-		attributedString.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
-		return attributedString;
 	}
 
 	public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style myStyle) {
@@ -71,26 +57,31 @@ public class TextItem extends SlideItem {
 		return new Rectangle((int) (myStyle.indent*scale), 0, boundsXSize, boundsYSize );
 	}
 
-	public void drawItem(int itemXSize, int itemYSize, float scale, Graphics graphics, Style myStyle, ImageObserver imageObserver) {
-		if (text == null || text.length() == 0) {
-			return;
-		}
-		List<TextLayout> layouts = getLayouts(graphics, myStyle, scale);
-		Point pen = new Point(itemXSize + (int)(myStyle.indent * scale),
-				itemYSize + (int) (myStyle.leading * scale));
-		Graphics2D graphics2d = (Graphics2D)graphics;
-		graphics2d.setColor(myStyle.color);
-		Iterator<TextLayout> it = layouts.iterator();
-		while (it.hasNext()) {
-			TextLayout layout = it.next();
-			pen.y += layout.getAscent();
-			layout.draw(graphics2d, pen.x, pen.y);
-			pen.y += layout.getDescent();
-		}
-	  }
+	public String toString() {
+		return "TextItem[" + getLevel()+","+getText()+"]";
+	}
 
-	private List<TextLayout> getLayouts(Graphics graphics, Style style, float scale) {
-		return createLayouts(graphics, style, scale);
+	public String getText() {
+		return text == null ? "" : text;
+	}
+
+	public AttributedString createAttributedString(Style style, float scale){
+		AttributedString attributedString = new AttributedString(getText());
+		attributedString.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
+		return attributedString;
+	}
+
+	public AttributedString getAttributedString(Style style, float scale) {
+		return createAttributedString(style, scale);
+	}
+
+	public List createNewLayoutsList(){
+		List<TextLayout> layouts = new ArrayList<TextLayout>();
+		return layouts;
+	}
+
+	public LineBreakMeasurer createNewLineBreakMeasurer(AttributedString attributedString, FontRenderContext frontRenderContext){
+		return new LineBreakMeasurer(attributedString.getIterator(), frontRenderContext);
 	}
 
 	public List<TextLayout> createLayouts(Graphics graphics, Style style, float scale){
@@ -107,16 +98,25 @@ public class TextItem extends SlideItem {
 		return layouts;
 	}
 
-	public List createNewLayoutsList(){
-		List<TextLayout> layouts = new ArrayList<TextLayout>();
-		return layouts;
+	private List<TextLayout> getLayouts(Graphics graphics, Style style, float scale) {
+		return createLayouts(graphics, style, scale);
 	}
 
-	public LineBreakMeasurer createNewLineBreakMeasurer(AttributedString attributedString, FontRenderContext frontRenderContext){
-		return new LineBreakMeasurer(attributedString.getIterator(), frontRenderContext);
-	}
-
-	public String toString() {
-		return "TextItem[" + getLevel()+","+getText()+"]";
+	public void drawItem(int itemXSize, int itemYSize, float scale, Graphics graphics, Style myStyle, ImageObserver imageObserver) {
+		if (text == null || text.length() == 0) {
+			return;
+		}
+		List<TextLayout> layouts = getLayouts(graphics, myStyle, scale);
+		Point pen = new Point(itemXSize + (int)(myStyle.indent * scale),
+				itemYSize + (int) (myStyle.leading * scale));
+		Graphics2D graphics2d = (Graphics2D)graphics;
+		graphics2d.setColor(myStyle.color);
+		Iterator<TextLayout> it = layouts.iterator();
+		while (it.hasNext()) {
+			TextLayout layout = it.next();
+			pen.y += layout.getAscent();
+			layout.draw(graphics2d, pen.x, pen.y);
+			pen.y += layout.getDescent();
+		}
 	}
 }

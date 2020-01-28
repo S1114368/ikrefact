@@ -26,9 +26,6 @@ import org.w3c.dom.NodeList;
  */
 
 public class XMLAccessor extends Accessor {
-
-	protected static final String DEFAULT_API_TO_USE = "dom";
-
 	/** namen van xml tags of attributen */
 	protected static final String TITLE = "showtitle";
 	protected static final String SLIDETITLE = "title";
@@ -39,7 +36,8 @@ public class XMLAccessor extends Accessor {
 	protected static final String TEXT = "text";
 	protected static final String IMAGE = "image";
 
-	/** tekst van messages */
+	protected static final String DEFAULT_API_TO_USE = "dom";
+
 	protected static final String PARSERCONFIGURATIONEXCEPTION = "Parser Configuration Exception";
 	protected static final String UNKNOWNTYPE = "Unknown Element type";
 	protected static final String NUMBERFORMATEXCEPTION = "Number Format Exception";

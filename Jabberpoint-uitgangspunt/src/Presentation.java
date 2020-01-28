@@ -45,11 +45,9 @@ public class Presentation {
 		this.slideViewComponent = slideViewerComponent;
 	}
 
-
 	public int getCurrentSlideNumber() {
 		return currentSlideNumber;
 	}
-
 
 	public void setCurrentSlideNumber(int number) {
 		currentSlideNumber = number;
@@ -60,6 +58,17 @@ public class Presentation {
 		if (slideViewComponent != null) {
 			slideViewComponent.updatePresentation(this, getCurrentSlide());
 		}
+	}
+
+	public Slide getSlide(int number) {
+		if (number < 0 || number >= getSize()) {
+			return null;
+		}
+		return (Slide)presentationSlides.get(number);
+	}
+
+	public Slide getCurrentSlide() {
+		return getSlide(currentSlideNumber);
 	}
 
 	public void previousSlide() {
@@ -74,25 +83,14 @@ public class Presentation {
 		}
 	}
 
-	// Verwijder de presentatie, om klaar te zijn voor de volgende
-	void clearPresentation() {
-		presentationSlides = new ArrayList<Slide>();
-		setCurrentSlideNumber(-1);
-	}
-
 	public void appendSlideToPresentation(Slide slide) {
 		presentationSlides.add(slide);
 	}
 
-	public Slide getSlide(int number) {
-		if (number < 0 || number >= getSize()) {
-			return null;
-		}
-		return (Slide)presentationSlides.get(number);
-	}
-
-	public Slide getCurrentSlide() {
-		return getSlide(currentSlideNumber);
+	// Verwijder de presentatie, om klaar te zijn voor de volgende
+	void clearPresentation() {
+		presentationSlides = new ArrayList<Slide>();
+		setCurrentSlideNumber(-1);
 	}
 
 	public void exitPresentation(int n) {
