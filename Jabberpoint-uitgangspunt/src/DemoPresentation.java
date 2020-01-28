@@ -10,45 +10,58 @@
 
 class DemoPresentation extends Accessor {
 
+//?
 	public void loadFile(Presentation presentation, String unusedFilename) {
 		presentation.setTitle("Demo Presentation");
-		Slide slide;
-		slide = new Slide();
-		slide.setSlideTitle("JabberPoint");
-		slide.append(1, "Het Java Presentatie Tool");
-		slide.append(2, "Copyright (c) 1996-2000: Ian Darwin");
-		slide.append(2, "Copyright (c) 2000-now:");
-		slide.append(2, "Gert Florijn en Sylvia Stuurman");
-		slide.append(4, "JabberPoint aanroepen zonder bestandsnaam");
-		slide.append(4, "laat deze presentatie zien");
-		slide.append(1, "Navigeren:");
-		slide.append(3, "Volgende slide: PgDn of Enter");
-		slide.append(3, "Vorige slide: PgUp of up-arrow");
-		slide.append(3, "Stoppen: q or Q");
-		presentation.appendSlideToPresentation(slide);
-
-		slide = new Slide();
-		slide.setSlideTitle("Demonstratie van levels en stijlen");
-		slide.append(1, "Level 1");
-		slide.append(2, "Level 2");
-		slide.append(1, "Nogmaals level 1");
-		slide.append(1, "Level 1 heeft stijl nummer 1");
-		slide.append(2, "Level 2 heeft stijl nummer 2");
-		slide.append(3, "Zo ziet level 3 er uit");
-		slide.append(4, "En dit is level 4");
-		presentation.appendSlideToPresentation(slide);
-
-		slide = new Slide();
-		slide.setSlideTitle("De derde slide");
-		slide.append(1, "Om een nieuwe presentatie te openen,");
-		slide.append(2, "gebruik File->Open uit het menu.");
-		slide.append(1, " ");
-		slide.append(1, "Dit is het einde van de presentatie.");
-		slide.appendSlideItem(new BitmapItem(1, "JabberPoint.jpg"));
-		presentation.appendSlideToPresentation(slide);
+		presentation.appendSlideToPresentation(makeFirstSlide());
+		presentation.appendSlideToPresentation(makeSecondSlide());
+		presentation.appendSlideToPresentation(makeThrirdSlide());
 	}
 
 	public void saveFile(Presentation presentation, String unusedFilename) {
 		throw new IllegalStateException("Save As->Demo! aangeroepen");
+	}
+
+	public Slide makeFirstSlide(){
+		Slide slide;
+		slide = new Slide();
+		slide.setSlideTitle("JabberPoint");
+		slide.appendText(1, "Het Java Presentatie Tool");
+		slide.appendText(2, "Copyright (c) 1996-2000: Ian Darwin");
+		slide.appendText(2, "Copyright (c) 2000-now:");
+		slide.appendText(2, "Gert Florijn en Sylvia Stuurman");
+		slide.appendText(4, "JabberPoint aanroepen zonder bestandsnaam");
+		slide.appendText(4, "laat deze presentatie zien");
+		slide.appendText(1, "Navigeren:");
+		slide.appendText(3, "Volgende slide: PgDn of Enter");
+		slide.appendText(3, "Vorige slide: PgUp of up-arrow");
+		slide.appendText(3, "Stoppen: q or Q");
+		return slide;
+	}
+
+	public Slide makeSecondSlide(){
+		Slide slide;
+		slide = new Slide();
+		slide.setSlideTitle("Demonstratie van levels en stijlen");
+		slide.appendText(1, "Level 1");
+		slide.appendText(2, "Level 2");
+		slide.appendText(1, "Nogmaals level 1");
+		slide.appendText(1, "Level 1 heeft stijl nummer 1");
+		slide.appendText(2, "Level 2 heeft stijl nummer 2");
+		slide.appendText(3, "Zo ziet level 3 er uit");
+		slide.appendText(4, "En dit is level 4");
+		return slide;
+	}
+
+	public Slide makeThrirdSlide(){
+		Slide slide;
+		slide = new Slide();
+		slide.setSlideTitle("De derde slide");
+		slide.appendText(1, "Om een nieuwe presentatie te openen,");
+		slide.appendText(2, "gebruik File->Open uit het menu.");
+		slide.appendText(1, " ");
+		slide.appendText(1, "Dit is het einde van de presentatie.");
+		slide.appendSlideItem(new BitmapItem(1, "JabberPoint.jpg"));
+		return slide;
 	}
 }

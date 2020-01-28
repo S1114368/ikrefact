@@ -39,8 +39,12 @@ public class Slide {
 	}
 
 	// Maak een TextItem van String, en voeg het TextItem toe
-	public void append(int level, String message) {
-		appendSlideItem(new TextItem(level, message));
+	public void appendText(int level, String message) {
+		appendSlideItem(turnStringIntoTextItem(level, message));
+	}
+
+	public TextItem turnStringIntoTextItem(int level, String message){
+		return new TextItem(level, message);
 	}
 
 	// geef het betreffende SlideItem
@@ -59,22 +63,20 @@ public class Slide {
 	}
 
 	// teken de slide
-	public void drawSlide(Graphics g, Rectangle area, ImageObserver view) {
-		float scale = getScale(area);
-	    int y = area.y;
+	public void drawSlide(Graphics graphics, Rectangle area, ImageObserver view) {
+		// De titel wordt apart behandeld
+		SlideItem slideItem = new TextItem(0, getTitle());
+		Style style = Style.getStyle(slideItem.getLevel());
 
-	// De titel wordt apart behandeld
-	    SlideItem slideItem = new TextItem(0, getTitle());
-	    Style style = Style.getStyle(slideItem.getLevel());
-	    slideItem.drawItem(area.x, y, scale, g, style, view);
-	    y += slideItem.getBoundingBox(g, view, scale, style).height;
-	    for (int number=0; number<getSlideSize(); number++) {
-	      slideItem = (SlideItem)getSlideItems().elementAt(number);
-	      style = Style.getStyle(slideItem.getLevel());
-	      slideItem.drawItem(area.x, y, scale, g, style, view);
-	      y += slideItem.getBoundingBox(g, view, scale, style).height;
-	    }
-	  }
+		slideItem.drawItem(area.x, area.y, getScale(area), graphics, style, view);
+		area.y += slideItem.getBoundingBox(graphics, view, getScale(area), style).height;
+		for (int number=0; number<getSlideSize(); number++) {
+			slideItem = (SlideItem)getSlideItems().elementAt(number);
+			style = Style.getStyle(slideItem.getLevel());
+			slideItem.drawItem(area.x, area.y, getScale(area), graphics, style, view);
+			area.y += slideItem.getBoundingBox(graphics, view, getScale(area), style).height;
+		}
+	}
 
 	// geef de schaal om de slide te kunnen tekenen
 	private float getScale(Rectangle area) {
