@@ -49,22 +49,27 @@ public class Presentation {
 		return currentSlideNumber;
 	}
 
-	public void setCurrentSlideNumber(int number) {
+	public void setCurrentSlideNumber(int number){
 		currentSlideNumber = number;
 		updatePresentationWithSlideNumber();
 	}
 
-	public void updatePresentationWithSlideNumber(){
-		if (slideViewComponent != null) {
+	public void updatePresentationWithSlideNumber()throws ArrayIndexOutOfBoundsException{
+		if (checkIfSlideViewComponentIsNotEmpty(slideViewComponent)) {
 			slideViewComponent.updatePresentation(this, getCurrentSlide());
 		}
 	}
 
+	private boolean checkIfSlideViewComponentIsNotEmpty(SlideViewerComponent slideViewComponent){
+		return slideViewComponent != null;
+	}
+
 	public Slide getSlide(int number) {
-		if (number < 0 || number >= getSize()) {
+		try{
+			return (Slide)presentationSlides.get(number);
+		} catch (Exception exception){
 			return null;
 		}
-		return (Slide)presentationSlides.get(number);
 	}
 
 	public Slide getCurrentSlide() {
@@ -72,8 +77,10 @@ public class Presentation {
 	}
 
 	public void previousSlide() {
-		if (currentSlideNumber > 0) {
+		try {
 			setCurrentSlideNumber(currentSlideNumber - 1);
+		} catch (ArrayIndexOutOfBoundsException exception) {
+			System.err.println(exception);
 		}
 	}
 

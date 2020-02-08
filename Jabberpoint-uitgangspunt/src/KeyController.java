@@ -14,7 +14,6 @@ import java.awt.event.KeyAdapter;
 public class KeyController extends KeyAdapter {
 	private Presentation presentation; // Er worden commando's gegeven aan de presentatie
 
-//wat kan je hier gebruiken
 	public KeyController(Presentation p) {
 		presentation = p;
 	}

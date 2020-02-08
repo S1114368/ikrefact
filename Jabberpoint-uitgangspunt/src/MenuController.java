@@ -69,7 +69,7 @@ public class MenuController extends MenuBar {
 		return new MenuItem(name, new MenuShortcut(name.charAt(0)));
 	}
 
-	public void addOptionsToMenu(Menu menu, String[] options){
+	private void addOptionsToMenu(Menu menu, String[] options){
 		for(int i=0; i < options.length; i++){
 			if(i == 3 && options[3] == EXIT){
 				menu.addSeparator();
@@ -79,9 +79,8 @@ public class MenuController extends MenuBar {
 		}
 	}
 
-	public void addActionListener(MenuItem menuItem, String event){
+	private void addActionListener(MenuItem menuItem, String event){
 		switch(event){
-
 			case OPEN:
 				menuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent actionEvent) {

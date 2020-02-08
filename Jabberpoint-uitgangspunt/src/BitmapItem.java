@@ -49,7 +49,6 @@ public class BitmapItem extends SlideItem {
 				((int) (myStyle.leading * scale)) + (int) (bufferedImage.getHeight(observer) * scale));
 	}
 
-	// kan je x en y gebruiken?
 	public void drawItem(int widthX, int heightY, float scale, Graphics graphic, Style myStyle, ImageObserver observer) {
 		int width = widthX + (int) (myStyle.indent * scale);
 		int height = heightY + (int) (myStyle.leading * scale);

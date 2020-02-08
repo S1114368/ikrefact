@@ -41,8 +41,9 @@ public class TextItem extends SlideItem {
 
 	public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style myStyle) {
 		List<TextLayout> layouts = getLayouts(graphics, myStyle, scale);
-		int boundsXSize = 0, boundsYSize = (int) (myStyle.leading * scale);
 		Iterator<TextLayout> iterator = layouts.iterator();
+		int boundsXSize = 0, boundsYSize = (int) (myStyle.leading * scale);
+
 		while (iterator.hasNext()) {
 			TextLayout layout = iterator.next();
 			Rectangle2D bounds = layout.getBounds();
@@ -65,32 +66,33 @@ public class TextItem extends SlideItem {
 		return text == null ? "" : text;
 	}
 
-	public AttributedString createAttributedString(Style style, float scale){
+	private AttributedString createAttributedString(Style style, float scale){
 		AttributedString attributedString = new AttributedString(getText());
 		attributedString.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
 		return attributedString;
 	}
 
-	public AttributedString getAttributedString(Style style, float scale) {
+	private AttributedString getAttributedString(Style style, float scale) {
 		return createAttributedString(style, scale);
 	}
 
-	public List createNewLayoutsList(){
+	private List createNewLayoutsList(){
 		List<TextLayout> layouts = new ArrayList<TextLayout>();
 		return layouts;
 	}
 
-	public LineBreakMeasurer createNewLineBreakMeasurer(AttributedString attributedString, FontRenderContext frontRenderContext){
+	private LineBreakMeasurer createNewLineBreakMeasurer(AttributedString attributedString, FontRenderContext frontRenderContext){
 		return new LineBreakMeasurer(attributedString.getIterator(), frontRenderContext);
 	}
 
-	public List<TextLayout> createLayouts(Graphics graphics, Style style, float scale){
+	private List<TextLayout> createLayouts(Graphics graphics, Style style, float scale){
 		List<TextLayout> layouts = createNewLayoutsList();
 		AttributedString attributedString = getAttributedString(style, scale);
 		Graphics2D graphics2D = (Graphics2D) graphics;
 		FontRenderContext frontRenderContext = graphics2D.getFontRenderContext();
 		LineBreakMeasurer measurer = createNewLineBreakMeasurer(attributedString, frontRenderContext);
 		float wrappingWidth = (Slide.SLIDE_WIDTH - style.indent) * scale;
+
 		while (measurer.getPosition() < getText().length()) {
 			TextLayout layout = measurer.nextLayout(wrappingWidth);
 			layouts.add(layout);
